@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Fragment} from 'react';
 import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
+import PropTypes from 'prop-types';
 
 class Trigger extends Component {
 
@@ -40,6 +41,9 @@ class Trigger extends Component {
             </Fragment>
         )
     }
+}
+Trigger.propTypes = {
+    onChange: PropTypes.func.isRequired
 }
 
 export default Trigger;
