@@ -1,50 +1,43 @@
-import React, {Component} from 'react';
-import {Fragment} from 'react';
-import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
-import PropTypes from 'prop-types';
+import React, { useState, Fragment } from "react";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import PropTypes from "prop-types";
 
-class Trigger extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            alertState: 'info',
-        }
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange(event) {
-        let activeAlert = event.target.value;
-        this.props.onChange(activeAlert);
-        this.setState({
-            alertState: activeAlert
-        });
-    }
-
-    render() {
+function Trigger(props) {
+    const [alertState, setAlertState] = useState("info");
+    const onChange = (event) => {
+        const activeAlert = event.target.value;
+        props.onChange(activeAlert);
+        setAlertState(activeAlert);
+    };
+    const alertTypes = props.alertTypes.map((type) => {
+        const text = type[0].toUpperCase() + type.slice(1);
         return (
-            <Fragment>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Alert</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Age"
-                        value={this.state.alertState}
-                        onChange={this.onChange}
-                    >
-                        <MenuItem value={'info'}>Info</MenuItem>
-                        <MenuItem value={'warning'}>Warning</MenuItem>
-                        <MenuItem value={'error'}>Error</MenuItem>
-                    </Select>
-                </FormControl>
-            </Fragment>
-        )
-    }
+            <MenuItem value={type} key={type}>
+                {text}
+            </MenuItem>
+        );
+    });
+    return (
+        <Fragment>
+            <FormControl fullWidth>
+                <InputLabel id='demo-simple-select-label'>Alert</InputLabel>
+                <Select
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    label='Age'
+                    value={alertState}
+                    onChange={onChange}
+                >
+                    {alertTypes}
+                </Select>
+            </FormControl>
+        </Fragment>
+    );
 }
+
 Trigger.propTypes = {
-    onChange: PropTypes.func.isRequired
-}
+    onChange: PropTypes.func.isRequired,
+    alertTypes: PropTypes.array.isRequired,
+};
 
 export default Trigger;
-
