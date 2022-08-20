@@ -5,7 +5,7 @@ import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
 class Trigger extends Component {
 
     constructor(props) {
-        super();
+        super(props);
         this.state = {
             alertState: 'info',
         }
@@ -13,10 +13,11 @@ class Trigger extends Component {
     }
 
     onChange(event) {
+        let activeAlert = event.target.value;
+        this.props.onChange(activeAlert);
         this.setState({
-            alertState: event.target.value
-        })
-        this.props.onChange(this.state.alertState)
+            alertState: activeAlert
+        });
     }
 
     render() {

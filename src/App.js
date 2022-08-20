@@ -15,39 +15,32 @@ class App extends Component {
 
     componentDidMount() {
         var info = true;
-        this.setState({warning: info})
+        this.setState({info: info})
     }
 
     onChange(value) {
-        console.log(value);
-        if (value === 'warning') {
-            this.setState({warning: true})
-        }
-        if (value === 'info') {
-            this.setState({info: true})
-        }
+        value === 'warning' ? this.setState({warning: true}) : this.setState({warning: false});
+        value === 'info' ? this.setState({info: true}) : this.setState({info: false});
     }
 
     render() {
-        const {info} = this.state;
-
         return (
             <>
                 <Stack sx={{width: '600px', padding: '20px'}} spacing={2}>
                     <Typography variant={'h4'}>Alerts</Typography>
                     {
-                        this.state.warning ? <MyAlert
+                        this.state.warning && <MyAlert
                             type={'warning'}
                             title={'Warning'}
                             content={'This is a warning message'}
-                        /> :null
+                        />
                     }
                     {
-                        info ? <MyAlert
+                        this.state.info && <MyAlert
                             type={'info'}
                             title={'Information'}
                             content={'This is a information message'}
-                        /> :null
+                        />
                     }
                     <Trigger onChange={this.onChange}/>
                 </Stack>
