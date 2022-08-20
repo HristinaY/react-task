@@ -1,8 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-### Tasks
+## The Tasks
 
 We will be marking on your ability to spot bad code and refactoring it into a more efficient solution.
 
